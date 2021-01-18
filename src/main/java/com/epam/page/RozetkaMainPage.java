@@ -1,6 +1,7 @@
 package com.epam.page;
 
 import com.epam.factory.DriverManager;
+import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,31 +15,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class RozetkaMainPage extends AbstractPage {
-
     private Logger logger = LogManager.getLogger(RozetkaMainPage.class);
     @FindBy(xpath = "(//button[@type='button'])[2]")
-    WebElement signInButton;
+    private WebElement signInButton;
 
     @FindBy(css = "#auth_email")
-    WebElement emailInput;
+    private WebElement emailInput;
 
     @FindBy(css = "#auth_pass")
-    WebElement passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(css = "div.form__row.auth-modal__form-bottom>button")
-    WebElement logInButton;
+    private WebElement logInButton;
 
     @FindBy(css = "a.header-topline__user-link")
-    WebElement userLink;
+    private WebElement userLink;
 
     @FindBy(xpath = "//div[contains(@class, 'menu-wrapper_state_static')]/ul/li/a")
-    List<WebElement> menu;
+    private List<WebElement> menu;
 
     @FindBy(xpath = "//div[@class='menu__main-cats']//li/a")
-    List<WebElement> categoryLinks;
+    private List<WebElement> categoryLinks;
 
     @FindBy(xpath = "//*[@name='search']")
-    WebElement inputSearch;
+    private WebElement inputSearch;
 
     public RozetkaMainPage clickSignInButton() {
         signInButton.click();
@@ -46,7 +46,7 @@ public class RozetkaMainPage extends AbstractPage {
     }
 
     public RozetkaMainPage setUserEmail(String email) {
-        new WebDriverWait(DriverManager.getDriver(), 10).until(ExpectedConditions.visibilityOf(emailInput));
+        Wait.waitForVisibilityOfElement(emailInput);
         emailInput.sendKeys(email);
         return this;
     }

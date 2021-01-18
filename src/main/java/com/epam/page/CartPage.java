@@ -1,22 +1,22 @@
 package com.epam.page;
 
+import com.epam.factory.DriverManager;
+import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class CartPage extends AbstractPage {
     @FindBy(css = "div.js-rz-cart>div>a")
-    WebElement cartButton;
-    @CacheLookup
+    private WebElement cartButton;
     @FindBy(css = "div.cart-product__main>a")
-    List<WebElement> cartProducts;
+    private List<WebElement> cartProducts;
     @FindBy(css = "#cartProductActions0")
-    WebElement cartProductActions;
+    private WebElement cartProductActions;
     @FindBy(xpath = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
-    WebElement deleteProductFromCartButton;
+    private WebElement deleteProductFromCartButton;
 
     public boolean isItemPresentInCart(String itemName) {
         boolean isPresent = false;
@@ -29,10 +29,13 @@ public class CartPage extends AbstractPage {
     }
 
     public boolean isCartEmpty() {
+        Wait.waitForCartIsEmpty(cartProducts);
+        System.out.println(cartProducts.size());
         return cartProducts.isEmpty();
     }
 
     public CartPage cartProductActionsClick() {
+        Wait.waitUntilElementToBeClickable(cartProductActions);
         cartProductActions.click();
         return this;
     }
