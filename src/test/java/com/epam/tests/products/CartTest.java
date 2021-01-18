@@ -13,11 +13,14 @@ public class CartTest extends BaseTest {
     private RozetkaMainPage rozetkaMainPage = new RozetkaMainPage();
     private CategoryPage categoryPage = new CategoryPage();
     private CartPage cartPage = new CartPage();
+    private String text = "iphone 12";
+    private String productLink = "computers-notebooks";
+    private String categoryLink = "apple";
 
     @Test
     public void searchProductAndAddToCart() {
         String itemName = rozetkaMainPage
-                .setTextInInputSearchAndSend("iphone 12")
+                .setTextInInputSearchAndSend(text)
                 .firstItemInCatalogClick()
                 .getItemName();
         categoryPage.clickBuyButton();
@@ -27,8 +30,8 @@ public class CartTest extends BaseTest {
     @Test
     public void deleteProductFromCart() {
         rozetkaMainPage
-                .moveToMenuLinks("Ноутбуки та комп’ютери")
-                .clickToCategoryLink("Apple")
+                .moveToMenuLinks(productLink)
+                .clickToCategoryLink(categoryLink)
                 .firstItemInCatalogClick()
                 .clickBuyButton()
                 .cartProductActionsClick()

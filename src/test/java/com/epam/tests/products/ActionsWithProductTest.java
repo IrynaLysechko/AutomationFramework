@@ -15,25 +15,33 @@ public class ActionsWithProductTest extends BaseTest {
 
     private RozetkaMainPage rozetkaMainPage = new RozetkaMainPage();
     private CategoryPage categoryPage = new CategoryPage();
+    private String productLink = "bt";
+    private String categoryLink = "refrigerators";
+    private String producer = "Arctic";
 
     @Test
     public void chooseCategoryAndProducerTest() {
         rozetkaMainPage
-                .moveToMenuLinks("Сантехніка та ремонт")
-                .clickToCategoryLink("Насоси та помпи")
-                .checkProducer("Optima");
+                .moveToMenuLinks(productLink)
+                .clickToCategoryLink(categoryLink)
+                .checkProducer(producer);
         assertTrue(categoryPage.isCatalogOfSelectedItemPresent(), "Didn't choose any producer of item");
     }
 
     @Test
     public void checkSorting() {
         rozetkaMainPage
-                .moveToMenuLinks("Ноутбуки та комп’ютери")
-                .clickToCategoryLink("Apple");
+                .moveToMenuLinks(productLink)
+                .clickToCategoryLink(categoryLink);
+        categoryPage
+                .clickReadyToGoCheckBox();
         List<Integer> productsPriceBeforeSelect = categoryPage.getProductsPrice();
         productsPriceBeforeSelect.sort(Collections.reverseOrder());
-        categoryPage.selectAnOptionToSort("2: expensive");
+        System.out.println(productsPriceBeforeSelect.toString());
+        categoryPage
+                .selectAnOptionToSort("2: expensive");
         List<Integer> productsPriceAfterSelect = categoryPage.getProductsPrice();
+        System.out.println(productsPriceAfterSelect.toString());
         assertEquals(productsPriceAfterSelect, productsPriceBeforeSelect, "Sorting failed");
     }
 

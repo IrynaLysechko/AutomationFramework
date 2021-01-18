@@ -1,5 +1,6 @@
 package com.epam.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -36,6 +37,7 @@ public class CartPage extends AbstractPage {
         return this;
     }
 
+    @Step
     public CartPage deleteProductFromCartButtonClick() {
         deleteProductFromCartButton.click();
         return this;

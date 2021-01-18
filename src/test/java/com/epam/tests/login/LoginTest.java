@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
-
     private LoginBO loginBO = new LoginBO();
     private User user = JsonReader.getUser();
 

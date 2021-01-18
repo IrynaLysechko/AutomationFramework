@@ -12,7 +12,7 @@ public class LoginBO {
         rozetkaMainPage = new RozetkaMainPage();
     }
 
-    @Step("Login with email {user.email} and password {user.password}")
+    @Step("Login with email {user.userEmail} and password {user.userPassword}")
     public void logIn(User user) {
         rozetkaMainPage
                 .clickSignInButton()
@@ -21,7 +21,7 @@ public class LoginBO {
                 .clickLogInButton();
     }
 
-    @Step("Check login")
+    @Step
     public boolean checkLogIn() {
         return rozetkaMainPage.userLink().isDisplayed();
     }

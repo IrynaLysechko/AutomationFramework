@@ -65,11 +65,11 @@ public class RozetkaMainPage extends AbstractPage {
         return userLink;
     }
 
-    @Step("Move to menu item")
+    @Step
     public RozetkaMainPage moveToMenuLinks(String menuItem) {
         Actions actions = new Actions(DriverManager.getDriver());
         for (WebElement element : menu) {
-            if (element.getText().equals(menuItem)) {
+            if (element.getAttribute("href").contains(menuItem)) {
                 actions.moveToElement(element).build().perform();
                 break;
             }
@@ -77,10 +77,10 @@ public class RozetkaMainPage extends AbstractPage {
         return this;
     }
 
-    @Step("Click category")
+    @Step
     public CategoryPage clickToCategoryLink(String categoryName) {
         for (WebElement element : categoryLinks) {
-            if (element.getText().trim().equals(categoryName)) {
+            if (element.getAttribute("href").contains(categoryName)) {
                 element.click();
                 break;
             }
@@ -88,10 +88,11 @@ public class RozetkaMainPage extends AbstractPage {
         return new CategoryPage();
     }
 
-    @Step("Set text in input search")
+    @Step
     public CategoryPage setTextInInputSearchAndSend(String searchItem) {
         inputSearch.sendKeys(searchItem);
         inputSearch.sendKeys(Keys.ENTER);
         return new CategoryPage();
     }
+
 }

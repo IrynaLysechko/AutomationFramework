@@ -33,15 +33,10 @@ public class DriverFactory {
             default:
                 throw new IllegalArgumentException(driverManagerType.toString());
         }
-        webDriver.manage().deleteAllCookies();
-        System.out.println(Thread.currentThread().getId());
-        setWait(webDriver, 20);
+        webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         webDriver.manage().window().maximize();
 
         return webDriver;
     }
 
-    public static void setWait(WebDriver driver, int time) {
-        driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
-    }
 }

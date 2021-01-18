@@ -12,8 +12,8 @@ public abstract class BaseTest {
         DriverManager.getDriver().get(getConfiguration().url());
     }
 
-    @AfterClass
-    public void turnDown() {
-        DriverManager.quitDriver();
-    }
+//    @AfterClass
+//    public void turnDown() {
+//        DriverManager.quitDriver();
+//    }
 }

@@ -30,6 +30,8 @@ public class CategoryPage extends AbstractPage {
     WebElement select;
     @FindBy(xpath = "(//*[@class='wish-button js-wish-button'])[1]")
     WebElement wishButton;
+    @FindBy(xpath = "//div[contains(@data-filter-name,'gotovo-k-otpravke')]//label")
+    WebElement readyToGoCheckBox;
 
     public void checkProducer(String producerName) {
         for (WebElement element : label) {
@@ -61,13 +63,17 @@ public class CategoryPage extends AbstractPage {
 
     public List<Integer> getProductsPrice() {
         List<Integer> priceList = new ArrayList<>();
-
         for (WebElement webElement : productsPrice) {
-            int price = Integer.parseInt(webElement.getText().replaceAll("\\s+",""));
+            new WebDriverWait(DriverManager.getDriver(), 25).until(ExpectedConditions.visibilityOf(webElement));
+            int price = Integer.parseInt(webElement.getText().replaceAll("\\s+", ""));
             priceList.add(price);
         }
-
         return priceList;
+    }
+
+    public CategoryPage clickReadyToGoCheckBox() {
+        readyToGoCheckBox.click();
+        return this;
     }
 
     public CategoryPage selectAnOptionToSort(String option) {
@@ -75,4 +81,5 @@ public class CategoryPage extends AbstractPage {
         select.selectByValue(option);
         return this;
     }
+
 }
