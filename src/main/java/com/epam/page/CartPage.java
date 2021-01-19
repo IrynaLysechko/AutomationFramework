@@ -1,6 +1,5 @@
 package com.epam.page;
 
-import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;

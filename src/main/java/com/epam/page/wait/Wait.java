@@ -1,8 +1,6 @@
 package com.epam.page.wait;
 
 import com.epam.factory.DriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
