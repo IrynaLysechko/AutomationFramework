@@ -28,8 +28,7 @@ public class CartPage extends AbstractPage {
     }
 
     public boolean isCartEmpty() {
-        Wait.waitForCartIsEmpty(cartProducts);
-        System.out.println(cartProducts.size());
+        Wait.waitForListIsEmpty(cartProducts);
         return cartProducts.isEmpty();
     }
 

@@ -44,5 +44,4 @@ public class ActionsWithProductTest extends BaseTest {
         System.out.println(productsPriceAfterSelect.toString());
         assertEquals(productsPriceAfterSelect, productsPriceBeforeSelect, "Sorting failed");
     }
-
 }

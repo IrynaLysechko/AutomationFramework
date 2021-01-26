@@ -16,6 +16,8 @@ public class CartTest extends BaseTest {
     private String text = "iphone 12";
     private String productLink = "computers-notebooks";
     private String categoryLink = "apple";
+    private String cN = "/cookers/";
+    private String pl = "bt";
 
     @Test
     public void searchProductAndAddToCart() {
@@ -30,8 +32,8 @@ public class CartTest extends BaseTest {
     @Test
     public void deleteProductFromCart() {
         rozetkaMainPage
-                .moveToMenuLinks(productLink)
-                .clickToCategoryLink(categoryLink)
+                .moveToMenuLinks(pl)
+                .clickToCategoryLink(cN)
                 .firstItemInCatalogClick()
                 .clickBuyButton()
                 .cartProductActionsClick()

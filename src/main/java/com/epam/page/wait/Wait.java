@@ -18,7 +18,7 @@ public class Wait {
         new WebDriverWait(DriverManager.getDriver(), 30).until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public static void waitForCartIsEmpty(List<WebElement> webElement) {
+    public static void waitForListIsEmpty(List<WebElement> webElement) {
         int timeOut = 20;
         new WebDriverWait(DriverManager.getDriver(), timeOut)
                 .until((ExpectedCondition<Boolean>) webDriver ->

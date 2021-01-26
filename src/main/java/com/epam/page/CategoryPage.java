@@ -4,6 +4,7 @@ import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
@@ -53,10 +54,12 @@ public class CategoryPage extends AbstractPage {
     }
 
     public String getItemName() {
+        System.out.println(itemName.getText());
         return itemName.getText();
     }
 
     public CartPage clickBuyButton() {
+        Wait.waitUntilElementToBeClickable(buyButton);
         buyButton.click();
         return new CartPage();
     }

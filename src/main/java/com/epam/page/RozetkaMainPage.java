@@ -10,7 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RozetkaMainPage extends AbstractPage {
     private Logger logger = LogManager.getLogger(RozetkaMainPage.class);
@@ -38,22 +41,26 @@ public class RozetkaMainPage extends AbstractPage {
     @FindBy(xpath = "//*[@name='search']")
     private WebElement inputSearch;
 
+    @Step
     public RozetkaMainPage clickSignInButton() {
         signInButton.click();
         return this;
     }
 
+    @Step
     public RozetkaMainPage setUserEmail(String email) {
         Wait.waitForVisibilityOfElement(emailInput);
         emailInput.sendKeys(email);
         return this;
     }
 
+    @Step
     public RozetkaMainPage setUserPassword(String password) {
         passwordInput.sendKeys(password);
         return this;
     }
 
+    @Step
     public RozetkaMainPage clickLogInButton() {
         logInButton.click();
         return this;
@@ -77,8 +84,34 @@ public class RozetkaMainPage extends AbstractPage {
 
     @Step
     public CategoryPage clickToCategoryLink(String categoryName) {
+//        String pattern = "(?:https?:\\/\\/)?(?:[^@\\n]+@)?(?:www\\.)?([^:\\/\\n?]+)";
+//        Pattern r = Pattern.compile(pattern);
+//
+//        for (WebElement element : categoryLinks) {
+//            String hrefAttributeFromElement = element.getAttribute("href");
+//            Matcher mather = r.matcher(hrefAttributeFromElement);
+//            List<String> matchesString = new ArrayList<>();
+//            while (mather.find()) {
+//                matchesString.add(mather.group());
+//            }
+//            matchesString.remove("ua");
+//            System.out.println(matchesString.toString());
+//            if (matchesString.size() > 1 && matchesString.get(1).equals(categoryName)) {
+//                element.click();
+//                break;
+//            }
+//        }
+//        return new CategoryPage();
+        String pattern = "/(.*?)/";
+        Pattern r = Pattern.compile(pattern);
         for (WebElement element : categoryLinks) {
-            if (element.getAttribute("href").contains(categoryName)) {
+            String element1 = element.getAttribute("href").replace("https://", "").replace("/ua", "");
+            Matcher m = r.matcher(element1);
+            String name = "";
+            if (m.find()) {
+                name = m.group();
+            }
+            if (name.equals(categoryName)) {
                 element.click();
                 break;
             }
