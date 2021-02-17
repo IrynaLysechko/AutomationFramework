@@ -8,12 +8,16 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class CartPage extends AbstractPage {
+
     @FindBy(css = "div.js-rz-cart>div>a")
     private WebElement cartButton;
+
     @FindBy(css = "div.cart-product__main>a")
     private List<WebElement> cartProducts;
+
     @FindBy(css = "#cartProductActions0")
     private WebElement cartProductActions;
+
     @FindBy(xpath = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
     private WebElement deleteProductFromCartButton;
 

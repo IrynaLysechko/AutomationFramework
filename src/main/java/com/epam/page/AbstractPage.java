@@ -8,4 +8,5 @@ public abstract class AbstractPage {
     public AbstractPage() {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
+
 }

@@ -3,6 +3,7 @@ package com.epam.page;
 import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+@Log4j2
 public class RozetkaMainPage extends AbstractPage {
-    private Logger logger = LogManager.getLogger(RozetkaMainPage.class);
+
     @FindBy(xpath = "(//button[@type='button'])[2]")
     private WebElement signInButton;
 
@@ -84,34 +87,17 @@ public class RozetkaMainPage extends AbstractPage {
 
     @Step
     public CategoryPage clickToCategoryLink(String categoryName) {
-//        String pattern = "(?:https?:\\/\\/)?(?:[^@\\n]+@)?(?:www\\.)?([^:\\/\\n?]+)";
-//        Pattern r = Pattern.compile(pattern);
-//
-//        for (WebElement element : categoryLinks) {
-//            String hrefAttributeFromElement = element.getAttribute("href");
-//            Matcher mather = r.matcher(hrefAttributeFromElement);
-//            List<String> matchesString = new ArrayList<>();
-//            while (mather.find()) {
-//                matchesString.add(mather.group());
-//            }
-//            matchesString.remove("ua");
-//            System.out.println(matchesString.toString());
-//            if (matchesString.size() > 1 && matchesString.get(1).equals(categoryName)) {
-//                element.click();
-//                break;
-//            }
-//        }
-//        return new CategoryPage();
-        String pattern = "/(.*?)/";
-        Pattern r = Pattern.compile(pattern);
+        String pattern = "(?:https?:\\/\\/)?(?:[^@\\n]+@)?(?:www\\.)?([^:\\/\\n?]+)";
+        Pattern compile = Pattern.compile(pattern);
         for (WebElement element : categoryLinks) {
-            String element1 = element.getAttribute("href").replace("https://", "").replace("/ua", "");
-            Matcher m = r.matcher(element1);
-            String name = "";
-            if (m.find()) {
-                name = m.group();
+            String hrefAttributeFromElement = element.getAttribute("href");
+            Matcher mather = compile.matcher(hrefAttributeFromElement);
+            List<String> matchesString = new ArrayList<>();
+            while (mather.find()) {
+                matchesString.add(mather.group());
             }
-            if (name.equals(categoryName)) {
+            matchesString.remove("ua");
+            if (matchesString.size() > 1 && matchesString.get(1).equals(categoryName)) {
                 element.click();
                 break;
             }
