@@ -2,12 +2,18 @@ package com.epam.page;
 
 import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,18 +50,16 @@ public class CategoryPage extends AbstractPage {
     @FindBy(xpath = "//div[contains(@data-filter-name,'gotovo-k-otpravke')]//label")
     private WebElement readyToGoCheckBox;
 
-    public void checkProducer(String producerName) {
-        for (WebElement element : label) {
-            if (element.getAttribute("for").equals(producerName)) {
-                element.click();
-                return;
-            }
-        }
+    public String getItemName() {
+        return itemName.getText();
     }
 
-    public boolean isCatalogOfSelectedItemPresent() {
-        Wait.waitForVisibilityOfElement(catalog);
-        return catalog.isDisplayed();
+    @Step
+    public List<Integer> getProductPrice() {
+        new WebDriverWait(DriverManager.getDriver(),30).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
+        return productsPrice.stream()
+                .map(webElement -> Integer.parseInt(webElement.getText().replaceAll("\\s+", "")))
+                .collect(Collectors.toList());
     }
 
     public CategoryPage firstItemInCatalogClick() {
@@ -64,20 +68,27 @@ public class CategoryPage extends AbstractPage {
         return this;
     }
 
-    public String getItemName() {
-        return itemName.getText();
+    @Step
+    public CategoryPage checkProducer(String producerName) {
+        for (WebElement element : label) {
+            if (element.getAttribute("for").equals(producerName)) {
+                element.click();
+                break;
+            }
+        }
+        return this;
     }
 
+    @Step
     public CartPage clickBuyButton() {
         Wait.waitUntilElementToBeClickable(buyButton);
         buyButton.click();
         return new CartPage();
     }
 
-    public List<Integer> getProductsPrice() {
-        return productsPrice.stream()
-                .map(webElement -> Integer.parseInt(webElement.getText().replaceAll("\\s+", "")))
-                .collect(Collectors.toList());
+    public CategoryPage sortList(List<Integer> list) {
+        list.sort(Comparator.reverseOrder());
+        return this;
     }
 
     public CategoryPage clickReadyToGoCheckBox() {
@@ -85,6 +96,7 @@ public class CategoryPage extends AbstractPage {
         return this;
     }
 
+    @Step
     public CategoryPage selectAnOptionToSort(String option) {
         Select select = new Select(DriverManager.getDriver()
                 .findElement(By.cssSelector("select.select-css.ng-untouched.ng-pristine.ng-valid")));
@@ -92,4 +104,13 @@ public class CategoryPage extends AbstractPage {
         return this;
     }
 
+    @Step
+    public void verifyCatalogOfItemPresent() {
+        Assertions.assertThat(catalog.isDisplayed());
+    }
+
+    @Step
+    public void verifySort(List<Integer> before, List<Integer> after) {
+        Assertions.assertThat(before).isEqualTo(after);
+    }
 }

@@ -4,8 +4,7 @@ import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,12 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Log4j2
 public class RozetkaMainPage extends AbstractPage {
 
-    @FindBy(xpath = "(//button[@type='button'])[2]")
+    @FindBy(xpath = "(//button[@class='header__button'])[2]")
     private WebElement signInButton;
 
     @FindBy(css = "#auth_email")
@@ -32,8 +30,8 @@ public class RozetkaMainPage extends AbstractPage {
     @FindBy(css = "div.form__row.auth-modal__form-bottom>button")
     private WebElement logInButton;
 
-    @FindBy(css = "a.header-topline__user-link")
-    private WebElement userLink;
+    @FindBy(css = "a.header__button")
+    private WebElement userOrder;
 
     @FindBy(xpath = "//div[contains(@class, 'menu-wrapper_state_static')]/ul/li/a")
     private List<WebElement> menu;
@@ -44,7 +42,6 @@ public class RozetkaMainPage extends AbstractPage {
     @FindBy(xpath = "//*[@name='search']")
     private WebElement inputSearch;
 
-    @Step
     public RozetkaMainPage clickSignInButton() {
         signInButton.click();
         return this;
@@ -63,14 +60,9 @@ public class RozetkaMainPage extends AbstractPage {
         return this;
     }
 
-    @Step
     public RozetkaMainPage clickLogInButton() {
         logInButton.click();
         return this;
-    }
-
-    public WebElement userLink() {
-        return userLink;
     }
 
     @Step
@@ -110,6 +102,11 @@ public class RozetkaMainPage extends AbstractPage {
         inputSearch.sendKeys(searchItem);
         inputSearch.sendKeys(Keys.ENTER);
         return new CategoryPage();
+    }
+
+    @Step
+    public void verifyUserLogIn() {
+        Assertions.assertThat(userOrder.isDisplayed());
     }
 
 }

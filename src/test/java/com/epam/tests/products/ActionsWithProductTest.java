@@ -5,43 +5,37 @@ import com.epam.page.RozetkaMainPage;
 import com.epam.tests.BaseTest;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
 import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class ActionsWithProductTest extends BaseTest {
 
-    private RozetkaMainPage rozetkaMainPage = new RozetkaMainPage();
-    private CategoryPage categoryPage = new CategoryPage();
-    private String productLink = "bt";
-    private String categoryLink = "refrigerators";
-    private String producer = "Arctic";
+    private final String productLink = "bt";
+    private final String categoryLink = "refrigerators";
 
     @Test
     public void chooseCategoryAndProducerTest() {
-        rozetkaMainPage
+        String producer = "Arctic";
+        new RozetkaMainPage()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink)
-                .checkProducer(producer);
-        assertTrue(categoryPage.isCatalogOfSelectedItemPresent(), "Didn't choose any producer of item");
+                .checkProducer(producer)
+                .verifyCatalogOfItemPresent();
     }
 
     @Test
     public void checkSorting() {
-        rozetkaMainPage
+        CategoryPage categoryPage = new CategoryPage();
+        new RozetkaMainPage()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink);
         categoryPage
                 .clickReadyToGoCheckBox();
-        List<Integer> productsPriceBeforeSelect = categoryPage.getProductsPrice();
-        productsPriceBeforeSelect.sort(Collections.reverseOrder());
-        System.out.println(productsPriceBeforeSelect.toString());
+        List<Integer> productsPriceBeforeSelect = categoryPage.getProductPrice();
         categoryPage
+                .sortList(productsPriceBeforeSelect)
                 .selectAnOptionToSort("2: expensive");
-        List<Integer> productsPriceAfterSelect = categoryPage.getProductsPrice();
-        System.out.println(productsPriceAfterSelect.toString());
-        assertEquals(productsPriceAfterSelect, productsPriceBeforeSelect, "Sorting failed");
+        List<Integer> productsPriceAfterSelect = categoryPage.getProductPrice();
+        categoryPage
+                .verifySort(productsPriceBeforeSelect, productsPriceAfterSelect);
     }
 }

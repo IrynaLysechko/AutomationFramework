@@ -11,7 +11,7 @@ import java.util.List;
 public class Wait {
 
     public static void waitUntilElementToBeClickable(WebElement webElement) {
-        new WebDriverWait(DriverManager.getDriver(), 25).until(ExpectedConditions.elementToBeClickable(webElement));
+        new WebDriverWait(DriverManager.getDriver(), 30).until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     public static void waitForVisibilityOfElement(WebElement webElement) {

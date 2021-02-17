@@ -2,6 +2,7 @@ package com.epam.page;
 
 import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -31,21 +32,25 @@ public class CartPage extends AbstractPage {
         return isPresent;
     }
 
-    public boolean isCartEmpty() {
-        Wait.waitForListIsEmpty(cartProducts);
-        return cartProducts.isEmpty();
-    }
-
     public CartPage cartProductActionsClick() {
         Wait.waitUntilElementToBeClickable(cartProductActions);
         cartProductActions.click();
         return this;
     }
 
-    @Step
     public CartPage deleteProductFromCartButtonClick() {
         deleteProductFromCartButton.click();
         return this;
+    }
+
+    @Step
+    public void verifyItemInCart(String itemName) {
+        Assertions.assertThat(isItemPresentInCart(itemName));
+    }
+
+    @Step
+    public void verifyCartIsEmpty() {
+        Assertions.assertThat(cartProducts).isEmpty();
     }
 }
 
