@@ -106,6 +106,7 @@ public class CategoryPage extends AbstractPage {
 
     @Step
     public void verifyCatalogOfItemPresent() {
+        Wait.waitForVisibilityOfElement(catalog);
         Assertions.assertThat(catalog.isDisplayed());
     }
 

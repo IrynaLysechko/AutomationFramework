@@ -12,7 +12,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void logInTest() {
-        System.out.println(user.getUserPassword());
         new RozetkaMainPage()
                 .clickSignInButton()
                 .setUserEmail(user.getUserEmail())
