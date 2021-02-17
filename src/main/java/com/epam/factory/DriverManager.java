@@ -1,27 +1,32 @@
 package com.epam.factory;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 
 import static com.epam.config.ConfigurationManager.getConfiguration;
 
+@Log4j2
 public class DriverManager {
 
-    private static WebDriver driver;
+    private static final ThreadLocal<WebDriver> WEBDRIVER_POOL = new ThreadLocal<>();
 
     private DriverManager() {
     }
 
     public static WebDriver getDriver() {
-        if (driver == null) {
-            driver = DriverFactory.createDriver(getConfiguration().browser());
+        if (WEBDRIVER_POOL.get() == null) {
+            log.debug("set driver to poll");
+            WEBDRIVER_POOL.set(DriverFactory.createDriver(getConfiguration().browser()));
         }
-        return driver;
+        return WEBDRIVER_POOL.get();
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (WEBDRIVER_POOL.get() != null) {
+            log.debug("remove driver from poll");
+            WEBDRIVER_POOL.get().quit();
+            WEBDRIVER_POOL.set(null);
         }
     }
+
 }
