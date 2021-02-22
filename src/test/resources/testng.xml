@@ -5,7 +5,7 @@
         <classes>
             <class name="com.epam.tests.login.LoginTest"/>
             <class name="com.epam.tests.products.ActionsWithProductTest"/>
-            <class name="com.epam.tests.products.CartTest"></class>
+            <class name="com.epam.tests.products.CartTest"/>
         </classes>
     </test>
 </suite>
