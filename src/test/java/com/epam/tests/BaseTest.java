@@ -1,8 +1,12 @@
 package com.epam.tests;
 
+import com.epam.allure.AllureAttach;
 import com.epam.factory.DriverManager;
 import com.epam.testng.listeners.TestListener;
+import io.qameta.allure.Allure;
 import org.testng.annotations.*;
+
+import java.io.IOException;
 
 import static com.epam.config.ConfigurationManager.getConfiguration;
 
@@ -15,7 +19,8 @@ public abstract class BaseTest {
     }
 
     @AfterClass
-    public void turnDown() {
+    public void turnDown() throws IOException {
         DriverManager.quitDriver();
+        AllureAttach.addFileToAllure("logs/all.log");
     }
 }

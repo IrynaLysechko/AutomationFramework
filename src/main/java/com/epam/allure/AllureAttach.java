@@ -17,7 +17,7 @@ public class AllureAttach {
         return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
-    @Attachment(value = "logs", type = "text/plain", fileExtension = ".log")
+    @Attachment(value = "logs", type = "text", fileExtension = ".log")
     public static byte[] addFileToAllure(String path) throws IOException {
         File file = new File(path);
         return Files.readAllBytes(Paths.get(file.getPath()));
