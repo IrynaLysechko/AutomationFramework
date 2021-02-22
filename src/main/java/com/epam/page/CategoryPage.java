@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,7 +32,7 @@ public class CategoryPage extends AbstractPage {
     @FindBy(css = "div.product__heading>h1")
     private WebElement itemName;
 
-    @FindBy(xpath = "//*[@class='buy-button button button_with_icon button_color_green button_size_large']")
+    @FindBy(xpath = "//*[@class='product__buy']//button")
     private WebElement buyButton;
 
     @FindBy(css = "div.js-rz-cart>div.header-actions__button-wrapper")
@@ -55,8 +56,6 @@ public class CategoryPage extends AbstractPage {
 
     @Step
     public List<Integer> getProductPrice() {
-        new WebDriverWait(DriverManager.getDriver(),50)
-                .until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return productsPrice.stream()
                 .map(webElement -> Integer.parseInt(webElement.getText().replaceAll("\\s+", "")))
                 .collect(Collectors.toList());
@@ -77,13 +76,14 @@ public class CategoryPage extends AbstractPage {
                 break;
             }
         }
+        new WebDriverWait(DriverManager.getDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return this;
     }
 
     @Step
     public CartPage clickBuyButton() {
         Wait.waitUntilElementToBeClickable(buyButton);
-        buyButton.click();
+        ((JavascriptExecutor) DriverManager.getDriver()).executeScript("arguments[0].click();", buyButton);
         return new CartPage();
     }
 

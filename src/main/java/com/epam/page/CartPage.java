@@ -46,8 +46,8 @@ public class CartPage extends AbstractPage {
     }
 
     @Step
-    public void verifyItemInCart(String itemName) {
-        Assertions.assertThat(isItemPresentInCart(itemName));
+    public void verifyItemInCart() {
+        Assertions.assertThat(cartProducts.size()).isGreaterThan(0);
     }
 
     @Step
