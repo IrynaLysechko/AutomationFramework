@@ -2,8 +2,6 @@ package com.epam.testng.listeners;
 
 import com.epam.allure.AllureAttach;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -13,13 +11,13 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.info("Test class started: " + iTestResult.getTestClass().getName());
-        log.info("Test started: " + iTestResult.getName());
+        log.debug("Test class started: " + iTestResult.getTestClass().getName());
+        log.debug("Test started: " + iTestResult.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.info("Test SUCCESS: " + iTestResult.getName());
+        log.debug("Test success: " + iTestResult.getName());
     }
 
     @Override
@@ -30,7 +28,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        log.info("Test skipped: " + iTestResult.getName());
+        log.debug("Test skipped: " + iTestResult.getName());
     }
 
     @Override

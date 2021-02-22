@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class CartTest extends BaseTest {
 
     @Test
-    public void searchProductAndAddToCart() {
+    public void verifyProductAddToCart() {
         String text = "iphone 12";
         String itemName = new RozetkaMainPage()
                 .setTextInInputSearchAndSend(text)
@@ -20,10 +20,11 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    public void deleteProductFromCart() {
+    public void verifyProductDeleteFromCart() {
         String productLink = "santekhnika-i-remont";
-        String categoryLink = "mixer_taps";
+        String categoryLink = "rakoviny";
         new RozetkaMainPage()
+                .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink)
                 .firstItemInCatalogClick()

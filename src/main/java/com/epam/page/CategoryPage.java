@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Log4j2
 public class CategoryPage extends AbstractPage {
 
-    @FindBy(xpath = "//div[@data-filter-name='producer']//ul[2]/li/ul/li/a/label")
+    @FindBy(xpath = "//div[@class='scrollbar__inner']//label")
     private List<WebElement> label;
 
     @FindBy(css = "div.catalog-selection")
@@ -44,11 +43,11 @@ public class CategoryPage extends AbstractPage {
     @FindBy(css = "select.select-css.ng-untouched.ng-pristine.ng-valid")
     private WebElement select;
 
-    @FindBy(xpath = "(//*[@class='wish-button js-wish-button'])[1]")
-    private WebElement wishButton;
-
     @FindBy(xpath = "//div[contains(@data-filter-name,'gotovo-k-otpravke')]//label")
     private WebElement readyToGoCheckBox;
+
+    @FindBy(xpath = "//input[@name='searchline']")
+    private WebElement inputForProducer;
 
     public String getItemName() {
         return itemName.getText();
@@ -56,12 +55,14 @@ public class CategoryPage extends AbstractPage {
 
     @Step
     public List<Integer> getProductPrice() {
-        new WebDriverWait(DriverManager.getDriver(),30).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
+        new WebDriverWait(DriverManager.getDriver(),50)
+                .until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return productsPrice.stream()
                 .map(webElement -> Integer.parseInt(webElement.getText().replaceAll("\\s+", "")))
                 .collect(Collectors.toList());
     }
 
+    @Step
     public CategoryPage firstItemInCatalogClick() {
         Wait.waitForVisibilityOfElement(firstItemInCatalog);
         firstItemInCatalog.click();
@@ -91,6 +92,7 @@ public class CategoryPage extends AbstractPage {
         return this;
     }
 
+    @Step
     public CategoryPage clickReadyToGoCheckBox() {
         readyToGoCheckBox.click();
         return this;

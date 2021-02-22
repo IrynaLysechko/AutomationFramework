@@ -30,6 +30,9 @@ public class RozetkaMainPage extends AbstractPage {
     @FindBy(css = "div.form__row.auth-modal__form-bottom>button")
     private WebElement logInButton;
 
+    @FindBy(xpath = "//*[@id='fat-menu']")
+    private WebElement catalogButton;
+
     @FindBy(css = "a.header__button")
     private WebElement userOrder;
 
@@ -60,8 +63,15 @@ public class RozetkaMainPage extends AbstractPage {
         return this;
     }
 
+    @Step
     public RozetkaMainPage clickLogInButton() {
         logInButton.click();
+        return this;
+    }
+
+    @Step
+    public RozetkaMainPage clickCatalogButton() {
+        catalogButton.click();
         return this;
     }
 
@@ -80,14 +90,16 @@ public class RozetkaMainPage extends AbstractPage {
     @Step
     public CategoryPage clickToCategoryLink(String categoryName) {
         String pattern = "(?:https?:\\/\\/)?(?:[^@\\n]+@)?(?:www\\.)?([^:\\/\\n?]+)";
-        Pattern compile = Pattern.compile(pattern);
+        Pattern r = Pattern.compile(pattern);
+
         for (WebElement element : categoryLinks) {
             String hrefAttributeFromElement = element.getAttribute("href");
-            Matcher mather = compile.matcher(hrefAttributeFromElement);
+            Matcher mather = r.matcher(hrefAttributeFromElement);
             List<String> matchesString = new ArrayList<>();
             while (mather.find()) {
                 matchesString.add(mather.group());
             }
+
             matchesString.remove("ua");
             if (matchesString.size() > 1 && matchesString.get(1).equals(categoryName)) {
                 element.click();

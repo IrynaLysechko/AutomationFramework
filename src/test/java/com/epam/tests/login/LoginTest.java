@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
     private final User user = JsonReader.getUser();
 
     @Test
-    public void logInTest() {
+    public void verifyUserLogInTest() {
         new RozetkaMainPage()
                 .clickSignInButton()
                 .setUserEmail(user.getUserEmail())

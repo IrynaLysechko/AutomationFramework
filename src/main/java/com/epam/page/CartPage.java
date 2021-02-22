@@ -32,12 +32,14 @@ public class CartPage extends AbstractPage {
         return isPresent;
     }
 
+    @Step
     public CartPage cartProductActionsClick() {
         Wait.waitUntilElementToBeClickable(cartProductActions);
         cartProductActions.click();
         return this;
     }
 
+    @Step
     public CartPage deleteProductFromCartButtonClick() {
         deleteProductFromCartButton.click();
         return this;

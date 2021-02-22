@@ -13,9 +13,10 @@ public class ActionsWithProductTest extends BaseTest {
     private final String categoryLink = "refrigerators";
 
     @Test
-    public void chooseCategoryAndProducerTest() {
+    public void verifyItemPresentInCatalog() {
         String producer = "Arctic";
         new RozetkaMainPage()
+                .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink)
                 .checkProducer(producer)
@@ -23,13 +24,15 @@ public class ActionsWithProductTest extends BaseTest {
     }
 
     @Test
-    public void checkSorting() {
+    public void verifySorting() {
         CategoryPage categoryPage = new CategoryPage();
         new RozetkaMainPage()
+                .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink);
         categoryPage
-                .clickReadyToGoCheckBox();
+                .clickReadyToGoCheckBox()
+                .checkProducer("Bosch");
         List<Integer> productsPriceBeforeSelect = categoryPage.getProductPrice();
         categoryPage
                 .sortList(productsPriceBeforeSelect)
