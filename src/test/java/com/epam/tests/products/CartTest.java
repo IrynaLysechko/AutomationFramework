@@ -11,7 +11,7 @@ public class CartTest extends BaseTest {
         String text = "iphone 12";
         new RozetkaMainPage()
                 .setTextInInputSearchAndSend(text)
-                .firstItemInCatalogClick()
+                .clickFirstItemInCatalog()
                 .clickBuyButton()
                 .verifyItemInCart();
     }
@@ -24,9 +24,9 @@ public class CartTest extends BaseTest {
                 .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink)
-                .firstItemInCatalogClick()
+                .clickFirstItemInCatalog()
                 .clickBuyButton()
-                .cartProductActionsClick()
+                .clickCartProductActions()
                 .deleteProductFromCartButtonClick()
                 .verifyCartIsEmpty();
     }

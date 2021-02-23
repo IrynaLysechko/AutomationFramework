@@ -11,24 +11,23 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.debug("Test class started: " + iTestResult.getTestClass().getName());
-        log.debug("Test started: " + iTestResult.getName());
+        log.debug("Test started: " + iTestResult.getMethod().getMethodName());
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.debug("Test success: " + iTestResult.getName());
+        log.debug("Test success: " + iTestResult.getMethod().getMethodName());
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        log.error(iTestResult.getTestClass().getName());
+        log.error("Test failure: " + iTestResult.getMethod().getMethodName());
         AllureAttach.takeScreenshotToAttachOnAllureReport();
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        log.debug("Test skipped: " + iTestResult.getName());
+        log.debug("Test skipped: " + iTestResult.getMethod().getMethodName());
     }
 
     @Override

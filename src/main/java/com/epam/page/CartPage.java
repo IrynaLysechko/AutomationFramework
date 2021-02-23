@@ -22,18 +22,8 @@ public class CartPage extends AbstractPage {
     @FindBy(xpath = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")
     private WebElement deleteProductFromCartButton;
 
-    public boolean isItemPresentInCart(String itemName) {
-        boolean isPresent = false;
-        for (WebElement webElement : cartProducts) {
-            if (webElement.getText().equals(itemName)) {
-                isPresent = true;
-            }
-        }
-        return isPresent;
-    }
-
     @Step
-    public CartPage cartProductActionsClick() {
+    public CartPage clickCartProductActions() {
         Wait.waitUntilElementToBeClickable(cartProductActions);
         cartProductActions.click();
         return this;
@@ -52,6 +42,7 @@ public class CartPage extends AbstractPage {
 
     @Step
     public void verifyCartIsEmpty() {
+        Wait.waitForListIsEmpty(cartProducts);
         Assertions.assertThat(cartProducts).isEmpty();
     }
 }

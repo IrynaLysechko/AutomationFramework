@@ -7,7 +7,7 @@
 - Allure report
 
 ### About project:
-Its training project to cover functionality of internet shop with automations tests.
+It's training project to cover functionality of internet shop with automations tests.
 
 ### To start: 
 Use `<mvn clean test>`. Tests will be launched in parallel.

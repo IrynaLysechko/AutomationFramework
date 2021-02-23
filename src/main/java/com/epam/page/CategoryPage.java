@@ -50,10 +50,6 @@ public class CategoryPage extends AbstractPage {
     @FindBy(xpath = "//input[@name='searchline']")
     private WebElement inputForProducer;
 
-    public String getItemName() {
-        return itemName.getText();
-    }
-
     @Step
     public List<Integer> getProductPrice() {
         return productsPrice.stream()
@@ -62,7 +58,7 @@ public class CategoryPage extends AbstractPage {
     }
 
     @Step
-    public CategoryPage firstItemInCatalogClick() {
+    public CategoryPage clickFirstItemInCatalog() {
         Wait.waitForVisibilityOfElement(firstItemInCatalog);
         firstItemInCatalog.click();
         return this;
@@ -103,6 +99,7 @@ public class CategoryPage extends AbstractPage {
         Select select = new Select(DriverManager.getDriver()
                 .findElement(By.cssSelector("select.select-css.ng-untouched.ng-pristine.ng-valid")));
         select.selectByValue(option);
+        new WebDriverWait(DriverManager.getDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return this;
     }
 
