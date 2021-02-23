@@ -19,7 +19,7 @@ public class Wait {
     }
 
     public static void waitForListIsEmpty(List<WebElement> webElement) {
-        int timeOut = 20;
+        int timeOut = 10;
         new WebDriverWait(DriverManager.getDriver(), timeOut)
                 .until((ExpectedCondition<Boolean>) webDriver ->
                         webElement.size() == 0);

@@ -67,6 +67,7 @@ public class CategoryPage extends AbstractPage {
     @Step
     public CategoryPage checkProducer(String producerName) {
         for (WebElement element : label) {
+            Wait.waitForVisibilityOfElement(element);
             if (element.getAttribute("for").equals(producerName)) {
                 element.click();
                 break;
