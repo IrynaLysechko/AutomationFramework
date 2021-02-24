@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Log4j2
-public class RozetkaMainPage extends AbstractPage {
+public class RozetkaMainPageWeb extends WebAbstractPage {
 
     @FindBy(xpath = "(//button[@class='header__button'])[2]")
     private WebElement signInButton;
@@ -45,38 +45,38 @@ public class RozetkaMainPage extends AbstractPage {
     @FindBy(xpath = "//*[@name='search']")
     private WebElement inputSearch;
 
-    public RozetkaMainPage clickSignInButton() {
+    public RozetkaMainPageWeb clickSignInButton() {
         signInButton.click();
         return this;
     }
 
     @Step
-    public RozetkaMainPage setUserEmail(String email) {
+    public RozetkaMainPageWeb setUserEmail(String email) {
         Wait.waitForVisibilityOfElement(emailInput);
         emailInput.sendKeys(email);
         return this;
     }
 
     @Step
-    public RozetkaMainPage setUserPassword(String password) {
+    public RozetkaMainPageWeb setUserPassword(String password) {
         passwordInput.sendKeys(password);
         return this;
     }
 
     @Step
-    public RozetkaMainPage clickLogInButton() {
+    public RozetkaMainPageWeb clickLogInButton() {
         logInButton.click();
         return this;
     }
 
     @Step
-    public RozetkaMainPage clickCatalogButton() {
+    public RozetkaMainPageWeb clickCatalogButton() {
         catalogButton.click();
         return this;
     }
 
     @Step
-    public RozetkaMainPage moveToMenuLinks(String menuItem) {
+    public RozetkaMainPageWeb moveToMenuLinks(String menuItem) {
         Actions actions = new Actions(DriverManager.getDriver());
         for (WebElement element : menu) {
             if (element.getAttribute("href").contains(menuItem)) {
@@ -88,7 +88,7 @@ public class RozetkaMainPage extends AbstractPage {
     }
 
     @Step
-    public CategoryPage clickToCategoryLink(String categoryName) {
+    public CategoryPageWeb clickToCategoryLink(String categoryName) {
         String pattern = "(?:https?:\\/\\/)?(?:[^@\\n]+@)?(?:www\\.)?([^:\\/\\n?]+)";
         Pattern r = Pattern.compile(pattern);
 
@@ -106,14 +106,14 @@ public class RozetkaMainPage extends AbstractPage {
                 break;
             }
         }
-        return new CategoryPage();
+        return new CategoryPageWeb();
     }
 
     @Step
-    public CategoryPage setTextInInputSearchAndSend(String searchItem) {
+    public CategoryPageWeb setTextInInputSearchAndSend(String searchItem) {
         inputSearch.sendKeys(searchItem);
         inputSearch.sendKeys(Keys.ENTER);
-        return new CategoryPage();
+        return new CategoryPageWeb();
     }
 
     @Step

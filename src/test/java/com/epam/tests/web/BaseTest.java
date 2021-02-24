@@ -1,9 +1,11 @@
-package com.epam.tests;
+package com.epam.tests.web;
 
 import com.epam.allure.AllureAttach;
 import com.epam.factory.DriverManager;
 import com.epam.testng.listeners.TestListener;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import java.io.IOException;
 

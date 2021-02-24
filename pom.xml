@@ -8,6 +8,10 @@
     <artifactId>AutomationFramework</artifactId>
     <version>1.0 - SNAPSHOT</version>
 
+    <properties>
+        <suite>${suite}</suite>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -25,7 +29,7 @@
                 <version>2.20</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/${suite}.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.5/aspectjweaver-1.9.5.jar"
@@ -113,6 +117,12 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.3.0</version>
         </dependency>
 
     </dependencies>

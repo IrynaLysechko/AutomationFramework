@@ -1,4 +1,4 @@
-package com.epam.page;
+package com.epam.page.web;
 
 import com.epam.page.wait.Wait;
 import io.qameta.allure.Step;

@@ -1,8 +1,8 @@
-package com.epam.tests.products;
+package com.epam.tests.web.products;
 
-import com.epam.page.CategoryPage;
-import com.epam.page.RozetkaMainPage;
-import com.epam.tests.BaseTest;
+import com.epam.page.CategoryPageWeb;
+import com.epam.page.RozetkaMainPageWeb;
+import com.epam.tests.web.BaseTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class ActionsWithProductTest extends BaseTest {
     @Test
     public void verifyItemPresentInCatalog() {
         String producer = "Arctic";
-        new RozetkaMainPage()
+        new RozetkaMainPageWeb()
                 .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink)
@@ -25,10 +25,10 @@ public class ActionsWithProductTest extends BaseTest {
 
     @Test
     public void verifySorting() {
-        CategoryPage categoryPage = new CategoryPage();
+        CategoryPageWeb categoryPage = new CategoryPageWeb();
         String producer = "Bosch";
         String optionToSort = "2: expensive";
-        new RozetkaMainPage()
+        new RozetkaMainPageWeb()
                 .clickCatalogButton()
                 .moveToMenuLinks(productLink)
                 .clickToCategoryLink(categoryLink);

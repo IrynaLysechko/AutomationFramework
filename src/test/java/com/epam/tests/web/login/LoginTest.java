@@ -1,8 +1,8 @@
-package com.epam.tests.login;
+package com.epam.tests.web.login;
 
 import com.epam.entity.User;
-import com.epam.page.RozetkaMainPage;
-import com.epam.tests.BaseTest;
+import com.epam.page.RozetkaMainPageWeb;
+import com.epam.tests.web.BaseTest;
 import com.epam.utils.JsonReader;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void verifyUserLogInTest() {
-        new RozetkaMainPage()
+        new RozetkaMainPageWeb()
                 .clickSignInButton()
                 .setUserEmail(user.getUserEmail())
                 .setUserPassword(user.getUserPassword())

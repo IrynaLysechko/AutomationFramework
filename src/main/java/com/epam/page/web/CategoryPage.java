@@ -1,4 +1,4 @@
-package com.epam.page;
+package com.epam.page.web;
 
 import com.epam.factory.DriverManager;
 import com.epam.page.wait.Wait;
@@ -52,6 +52,7 @@ public class CategoryPage extends AbstractPage {
 
     @Step
     public List<Integer> getProductPrice() {
+        new WebDriverWait(DriverManager.getDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return productsPrice.stream()
                 .map(webElement -> Integer.parseInt(webElement.getText().replaceAll("\\s+", "")))
                 .collect(Collectors.toList());
@@ -73,7 +74,6 @@ public class CategoryPage extends AbstractPage {
                 break;
             }
         }
-        new WebDriverWait(DriverManager.getDriver(), 20).until(ExpectedConditions.visibilityOfAllElements(productsPrice));
         return this;
     }
 
