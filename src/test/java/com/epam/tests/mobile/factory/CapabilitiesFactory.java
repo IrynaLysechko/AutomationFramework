@@ -1,6 +1,7 @@
 package com.epam.tests.mobile.factory;
 
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class CapabilitiesFactory {
@@ -16,6 +17,7 @@ public class CapabilitiesFactory {
         capabilities.setCapability(MobileCapabilityType.UDID, UDID);
         capabilities.setCapability("appPackage", APP_PACKAGE);
         capabilities.setCapability("appActivity", APP_ACTIVITY);
+        Allure.addAttachment("capabilities", capabilities.asMap().toString());
         return capabilities;
     }
 }

@@ -3,6 +3,7 @@ package com.epam.page.mobile;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
 
 import java.util.List;
@@ -37,30 +38,37 @@ public class RozetkaMainPageMobile extends MobileAbstractPage {
         super(driver);
     }
 
+    @Step
     public RozetkaMainPageMobile clickCatalog() {
         catalog.click();
         return this;
     }
 
-    public RozetkaMainPageMobile chooseConcreteItem() {
+    @Step
+    public RozetkaMainPageMobile chooseProduct() {
         concreteItem.get(1).click();
         return this;
     }
 
-    public RozetkaMainPageMobile chooseItem() {
+    @Step
+    public RozetkaMainPageMobile chooseFirstItem() {
         itemList.get(0).click();
         return this;
     }
 
+    @Step
     public RozetkaMainPageMobile clickAddToCartButton() {
         addToCartButton.click();
         return this;
     }
+
+    @Step
     public RozetkaMainPageMobile clickCartButton() {
         cartButton.click();
         return this;
     }
 
+    @Step
     public void verifyProductPresentInCart() {
         Assertions.assertThat(doOrderButton.isDisplayed());
     }

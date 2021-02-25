@@ -9,8 +9,8 @@ public class MobileCartTest extends BaseTest {
     public void verifyProductAddToCart() {
         rozetkaMainPageMobile
                 .clickCatalog()
-                .chooseItem()
-                .chooseConcreteItem()
+                .chooseFirstItem()
+                .chooseProduct()
                 .clickAddToCartButton()
                 .clickCartButton()
                 .verifyProductPresentInCart();
