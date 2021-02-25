@@ -4,7 +4,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.Keys;
 
 import java.util.List;
 
@@ -25,9 +24,6 @@ public class RozetkaMainPageMobile extends MobileAbstractPage {
     @AndroidFindBy(id = "ua.com.rozetka.shop:id/item_section_btn_section")
     private List<MobileElement> concreteItem;
 
-    @AndroidFindBy(id = "ua.com.rozetka.shop:id/item_search_tv_title")
-    private List<MobileElement> searchItemList;
-
     @AndroidFindBy(xpath = "(//android.widget.ImageView[@content-desc=\"Додати в кошик\"])[1]")
     private MobileElement addToCartButton;
 
@@ -43,16 +39,6 @@ public class RozetkaMainPageMobile extends MobileAbstractPage {
 
     public RozetkaMainPageMobile clickCatalog() {
         catalog.click();
-        return this;
-    }
-
-    public RozetkaMainPageMobile clickViewInputSearch() {
-        viewInputSearch.click();
-        return this;
-    }
-
-    public RozetkaMainPageMobile setQueryToInputSearch(String query) {
-        queryInputSearch.sendKeys(query);
         return this;
     }
 
@@ -75,7 +61,7 @@ public class RozetkaMainPageMobile extends MobileAbstractPage {
         return this;
     }
 
-    public void verifyItemAddToCart() {
+    public void verifyProductPresentInCart() {
         Assertions.assertThat(doOrderButton.isDisplayed());
     }
 }

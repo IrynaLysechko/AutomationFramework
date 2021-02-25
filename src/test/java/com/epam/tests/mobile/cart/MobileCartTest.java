@@ -1,5 +1,6 @@
-package com.epam.tests.mobile;
+package com.epam.tests.mobile.cart;
 
+import com.epam.tests.mobile.BaseTest;
 import org.testng.annotations.Test;
 
 public class MobileCartTest extends BaseTest {
@@ -12,7 +13,7 @@ public class MobileCartTest extends BaseTest {
                 .chooseConcreteItem()
                 .clickAddToCartButton()
                 .clickCartButton()
-                .verifyItemAddToCart();
+                .verifyProductPresentInCart();
     }
 
 }

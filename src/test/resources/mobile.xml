@@ -3,7 +3,7 @@
 <suite name="Mobile tests" verbose="2" parallel="methods" thread-count="10">
     <test name="Rozetka Test">
         <classes>
-            <class name="com.epam.tests.mobile.MobileCartTest"/>
+            <class name="com.epam.tests.mobile.cart.MobileCartTest"/>
         </classes>
     </test>
 </suite>
