@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" packages="com.epam.report.allure">
+    <Appenders>
+        <File name="FileAppender" filename="logs/all.log">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </File>
+
+        <ReportPortalLog4j2Appender name="ReportPortalAppender"> <!--packages="com.epam.ta.reportportal.log4j.appender"-->
+            <PatternLayout
+                    pattern="%d [%t] %-5level %logger{36} - %msg%n%throwable"/>
+        </ReportPortalLog4j2Appender>
+
+        <AllureReportLog4j2Appender name="AllureAppender">
+            <PatternLayout
+                    pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </AllureReportLog4j2Appender>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ReportPortalAppender"/>
+            <AppenderRef ref="AllureAppender"/>
+        </Root>
+        <Logger name="com.epam.reportportal.service" level="WARN" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ReportPortalAppender"/>
+        </Logger>
+        <Logger name="com.epam.reportportal.utils" level="WARN" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ReportPortalAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>

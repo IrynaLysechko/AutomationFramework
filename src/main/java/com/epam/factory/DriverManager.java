@@ -15,7 +15,7 @@ public class DriverManager {
 
     public static WebDriver getDriver() {
         if (WEBDRIVER_POOL.get() == null) {
-            log.debug("set driver to poll");
+            log.info("set driver to poll");
             WEBDRIVER_POOL.set(DriverFactory.createDriver(getConfiguration().browser()));
         }
         return WEBDRIVER_POOL.get();
@@ -23,7 +23,7 @@ public class DriverManager {
 
     public static void quitDriver() {
         if (WEBDRIVER_POOL.get() != null) {
-            log.debug("remove driver from poll");
+            log.info("remove driver from poll");
             WEBDRIVER_POOL.get().quit();
             WEBDRIVER_POOL.set(null);
         }

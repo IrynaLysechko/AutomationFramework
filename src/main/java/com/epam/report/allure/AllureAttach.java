@@ -1,4 +1,4 @@
-package com.epam.allure;
+package com.epam.report.allure;
 
 import com.epam.factory.DriverManager;
 import io.qameta.allure.Attachment;

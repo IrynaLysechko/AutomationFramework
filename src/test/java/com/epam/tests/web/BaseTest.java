@@ -1,6 +1,6 @@
 package com.epam.tests.web;
 
-import com.epam.allure.AllureAttach;
+import com.epam.report.allure.AllureAttach;
 import com.epam.factory.DriverManager;
 import com.epam.testng.listeners.TestListener;
 import org.testng.annotations.AfterMethod;
