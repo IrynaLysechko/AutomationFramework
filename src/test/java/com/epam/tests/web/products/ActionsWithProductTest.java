@@ -2,6 +2,7 @@ package com.epam.tests.web.products;
 
 import com.epam.page.CategoryPageWeb;
 import com.epam.page.RozetkaMainPageWeb;
+import com.epam.page.data.ProductDataProvider;
 import com.epam.tests.web.BaseTest;
 import org.testng.annotations.Test;
 
@@ -9,11 +10,9 @@ import java.util.List;
 
 public class ActionsWithProductTest extends BaseTest {
 
-    private final String productLink = "bt";
-    private final String categoryLink = "refrigerators";
-
-    @Test
-    public void verifyItemPresentInCatalog() {
+    @Test(dataProviderClass = ProductDataProvider.class,
+            dataProvider = "productDataProvider")
+    public void verifyItemPresentInCatalog(String productLink, String categoryLink) {
         String producer = "Arctic";
         new RozetkaMainPageWeb()
                 .clickCatalogButton()
@@ -23,8 +22,9 @@ public class ActionsWithProductTest extends BaseTest {
                 .verifyCatalogOfItemPresent();
     }
 
-    @Test
-    public void verifySorting() {
+    @Test(dataProviderClass = ProductDataProvider.class,
+            dataProvider = "productDataProvider")
+    public void verifySorting(String productLink, String categoryLink) {
         CategoryPageWeb categoryPage = new CategoryPageWeb();
         String producer = "Bosch";
         String optionToSort = "2: expensive";
