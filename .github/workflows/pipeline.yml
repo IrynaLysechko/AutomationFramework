@@ -17,18 +17,10 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-          
-      - name: Run automation tests for web application
-        run: mvn clean test -Dsuite=web
-        
-      - name: Allure report
-      - uses: afiore/action-allure-report@v0.1.0
-        with:
-         results-dir: target/allure-results
-         report-dir: target/site/allureReport
-         
-      - name: Publishing Allure artifact to GitHub Actions
-        uses: actions/upload-artifact@v2
+          cashe: maven
+      - run: mvn clean test -Dsuite=web
+      - run: allure generate
+      - uses: actions/upload-artifact@v2
         with:
           name: allure-report
           path: target/site/allureReport
