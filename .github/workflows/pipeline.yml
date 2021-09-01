@@ -19,7 +19,11 @@ jobs:
           distribution: 'adopt'
           caсhe: maven
       - run: mvn clean test -Dsuite=web
+      
+      - name: Allure report generation
       - run: mvn allure:report
+      
+      - name: Upload allure report artifact
       - uses: actions/upload-artifact@v2
         with:
           name: allure-report
