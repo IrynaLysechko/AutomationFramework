@@ -14,6 +14,6 @@ It's training project to cover functionality of internet shop with automations t
 Use `<mvn clean test>`with parameters -Dsuite=web or -Dsuite=mobile
 
 ### To generate report:
-Use `<allure serve target/allure-results>` to generate report and automatically open it.
+Use `<mvn allure:report>` to generate report in target/site/allure report dir
 
 
